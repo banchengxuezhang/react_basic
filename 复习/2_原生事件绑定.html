@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn1">按钮1</button>
+    <button id="btn2">按钮2</button>
+    <button id="btn2" onclick="demo()">按钮3</button>
+    <script type="text/javascript">
+    // document.getElementById('btn1').onclick=function(){
+    //     alert('就是看哈、');
+    // }
+    let btn1=document.getElementById('btn1');
+    btn1.addEventListener('click',function(){
+        alert('我是按钮1');
+    })
+    function demo(){
+        alert('我是按钮3');
+    }
+    </script>
+</body>
+</html>

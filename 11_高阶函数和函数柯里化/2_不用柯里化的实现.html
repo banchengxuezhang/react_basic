@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="saveUsername"></div>
+    <script type="text/javascript" src="/js/react.development.js"></script>
+    <script type="text/javascript" src="/js/react-dom.development.js"></script>
+    <script type="text/javascript" src="/js/babel.min.js"></script>
+    <script type="text/babel">
+        class Demo extends React.Component{
+      state={
+          username:'',
+          password:''
+      }
+        showData=()=>{
+            event.preventDefault();//阻止表单提交
+           alert(`姓名：${this.state.username}，密码：${this.state.password}`);
+           
+          
+        }
+        //保存表单数据到状态中
+        saveFormData=(dataType,event)=>{
+            
+                this.setState({
+                 [dataType]:event.target.value
+              })
+
+            }
+        render(){
+            return(  
+                <div>
+                    <form action="http://www.atguigu.com" onSubmit={this.showData}>
+                        用户名：<input onChange={event=>this.saveFormData('username',event)} name="username" type="text"/>    
+                        密码：<input onChange={event=>this.saveFormData('password',event)}type="password" name="password"/>
+                        <button >查看密码</button>
+                    </form> 
+                </div>
+            )
+        }
+    }
+    ReactDOM.render(<Demo/>,document.getElementById('saveUsername'));
+    </script>
+</body>
+
+</html>

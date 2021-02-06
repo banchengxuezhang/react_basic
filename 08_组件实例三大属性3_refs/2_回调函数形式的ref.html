@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="test"></div>
+  <script type="text/javascript" src="/js/react.development.js"></script>
+  <script type="text/javascript" src="/js/react-dom.development.js"></script>
+  <script type="text/javascript" src="/js/babel.min.js"></script>
+    <script type="text/babel">
+    //创建组件
+    class Demo extends React.Component{
+        state={
+            isHot:false
+        }
+        changeWeather=()=>{
+            this.setState({
+                isHot:!this.state.isHot
+            })
+        }
+        showData=()=>{
+            let{input1}=this;
+            alert(input1.value);
+        }
+      render(){
+          return(
+              <div>
+                <h1>今天天气很{this.state.isHot?'炎热':'寒冷'}</h1>
+               { /* <input ref={c=>{this.input1=c;console.log('调用我了',c);}} type="text"/>&nbsp;<br/><br/> */}
+               <input ref={c=>this.input1=c} type="text"/>&nbsp;<br/><br/>
+               <button onClick={this.showData}>点我提示数据</button>&nbsp;
+                <button onClick={this.changeWeather}>点我切换天气</button>
+              </div>
+          )
+      }
+    }
+    //渲染组件到页面
+    ReactDOM.render(<Demo/>,document.getElementById('test'));
+    </script>
+</body>
+</html>

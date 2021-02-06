@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="test"></div>
+  <script type="text/javascript" src="/js/react.development.js"></script>
+  <script type="text/javascript" src="/js/react-dom.development.js"></script>
+  <script type="text/javascript" src="/js/babel.min.js"></script>
+    <script type="text/babel">
+    class Demo extends React.Component{
+        showData=(event)=>{
+            event.preventDefault();//阻止表单提交
+            alert('用户名：'+this.username.value+'密码：'+this.password.value);
+        }
+        render(){
+            return(  
+                <div>
+                    <form action="http://www.atguigu.com" onSubmit={this.showData}>
+                        用户名：<input ref={c=>this.username=c} name="username" type="text"/>    
+                        密码：<input type="password" name="password" ref={c=>this.password=c}/>
+                        <button >查看密码</button>
+                    </form> 
+                </div>
+            )
+        }
+    }
+    ReactDOM.render(<Demo/>,document.getElementById('test'));
+    </script>
+</body>
+</html>

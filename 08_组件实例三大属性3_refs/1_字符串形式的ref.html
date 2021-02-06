@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="test"></div>
+  <script type="text/javascript" src="/js/react.development.js"></script>
+  <script type="text/javascript" src="/js/react-dom.development.js"></script>
+  <script type="text/javascript" src="/js/babel.min.js"></script>
+    <script type="text/babel">
+    //创建组件
+    class Demo extends React.Component{
+        //展示左侧输入数据
+        promptData=()=>{
+            alert(this.refs.input1.value);
+            console.log(this.refs.input1);
+        }
+        //失去焦点显示数据
+        showData=()=>{
+            alert(this.refs.input2.value);
+        }
+        render(){
+            return (
+                <div>
+                    <input ref="input1" type="text" placeholder="点击按钮提示数据"/> &nbsp;&nbsp;&nbsp;&nbsp;
+                    <button ref="button1" onClick={this.promptData}>点击显示左侧数据</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input ref="input2" onBlur={this.showData} type="text" placeholder="失去焦点显示文字" />   
+                </div>
+            )
+        }
+    }
+    //渲染组件到页面
+    ReactDOM.render(<Demo a="1" b="2"/>,document.getElementById('test'));
+    </script>
+</body>
+</html>

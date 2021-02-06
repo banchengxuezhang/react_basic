@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="test"></div>
+    <script type="text/javascript" src="/js/react.development.js"></script>
+    <script type="text/javascript" src="/js/react-dom.development.js"></script>
+    <script type="text/javascript" src="/js/babel.min.js"></script>
+    <script type="text/babel">
+        //1.创建组件
+    class Weather extends React.Component{
+        //构造器调用几次，一次
+        constructor(props){
+         super(props);
+         //状态初始化
+         this.state={
+             isHot:true,
+             wind:'微风'
+         }
+         this.changeWeather=this.changeWeather.bind(this);
+        }
+        //点几次调用几次
+        changeWeather(){
+            //由于changeWeather是作为onClick的回调，所以不是通过实例调用的，是直接调用。
+            //类里面默认开启局部严格模式，所以changeWeather中的this是undefined
+        
+          //严重注意 状态不可以直接更改，要借助内部api去更新，且是合并，不是替换
+            this.setState({
+                isHot:!(this.state.isHot)
+            });
+           
+            }
+            //render 调用多少次？---1+n次 1是初始化的那次，n是你修改的次数
+        render(){
+           let {isHot,wind}=this.state;
+            return(<div>
+                    <h1  id='title' onClick={this.changeWeather}>今天天气很{isHot?'炎热':'寒冷'},{wind}</h1>
+                  </div>)
+        }
+    }
+
+    ReactDOM.render(<Weather/>,document.getElementById('test'));
+    // document.getElementById('title').addEventListener('click',()=>{
+    //     console.log('标题被点击了')
+    // })
+    // document.getElementById('title').onclick=function(){
+    //     console.log('标题被点击了！');
+    // }
+    
+    </script>
+</body>
+
+</html>

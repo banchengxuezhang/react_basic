@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="test"></div>
+    <div id="test1"></div>
+    <div id="test2"></div>
+    <script type="text/javascript" src="/js/react.development.js"></script>
+    <script type="text/javascript" src="/js/react-dom.development.js"></script>
+    <script type="text/javascript" src="/js/babel.min.js"></script>
+    <script type="text/javascript" src="/js/prop-types.js"></script>
+    <script type="text/babel">
+    //创建组件
+    class Person extends React.Component{
+        render(){
+            console.log(this);
+            //props值只读的，只允许读，不允许改
+            let {name,sex,age}=this.props;
+            //this.props.name='jack';//此行代码会报错，因为props只读
+            return (
+                <div>
+                    <ul>
+                        <li>姓名:{name}</li>
+                        <li>性别:{sex}</li>
+                        <li>年龄:{age+1}</li>
+                    </ul>
+                    <ul></ul>
+                </div>
+            )
+        }
+    }
+   //import * as propType from '../js/prop-types.js'
+   //对标签值属性进行类型、必要性的限制
+    Person.propTypes={
+        name:PropTypes.string.isRequired,//限制name必传 且为字符串
+        sex:PropTypes.string,//限制sex为字符串
+        age:PropTypes.number,//限制age为数字
+        speak:PropTypes.func//限制speak为函数
+    }
+    //指定默认标签属性值
+    Person.defaultProps={
+        sex:'男',//sex默认为男
+        age:18//默认年龄为18
+    }
+    let p={
+        name:'小虎',
+        age:18,
+        sex:'女'
+    }
+    ReactDOM.render(<Person name="小明" speak={speak}  sex={p.sex}/>,document.getElementById('test'));
+    ReactDOM.render(<Person {...p}/>,document.getElementById('test1'));
+    ReactDOM.render(<Person {...p}/>,document.getElementById('test2'));
+    function speak() {
+        console.log('我说话了');
+      }
+    </script>
+</body>
+</html>

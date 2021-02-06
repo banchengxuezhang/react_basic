@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id='test'></div>
+    <script type="text/javascript" src="/js/react.development.js"></script>
+    <script type="text/javascript" src="/js/react-dom.development.js"></script>
+    <script type="text/javascript" src="/js/babel.min.js"></script>
+    <script type="text/javascript" src="/js/prop-types.js"></script>
+    <script type="text/babel">
+    function Test(props){
+     let{name,age,sex}=props;
+        return (<div>
+                   <ul>
+                    <li>姓名：{name}</li>
+                    <li>年龄：{age}</li>
+                    <li>性别：{sex}</li>
+                    </ul>
+                </div>)
+    }
+    Test.propTypes={
+        name:PropTypes.string.isRequired,
+        age:PropTypes.number,
+        sex:PropTypes.string
+    }
+    Test.defaultProps={
+        sex:'男',
+        age:19
+    }
+    ReactDOM.render(<Test name="小明" age={18} sex="男" />,document.getElementById('test'));
+    </script>
+</body>
+</html>

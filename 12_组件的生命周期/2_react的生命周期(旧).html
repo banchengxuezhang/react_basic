@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="test"></div>
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <script type="text/javascript" src="../js/react-dom.development.js"></script>
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+    <script type="text/babel">
+    //创建组件
+    class Sum extends React.Component{
+        //构造器钩子
+        constructor(props){
+            console.log('Sum---constructor');
+            super(props);
+             //初始化状态
+            this.state={
+                count:0
+            }
+        }
+        //卸载组件按钮的回调
+        unmount=()=>{
+            ReactDOM.unmountComponentAtNode(document.getElementById('test'));
+        }
+        add=()=>{
+            //获取原状态
+            let {count}=this.state;
+            //更新状态
+            this.setState({
+                count:count+1
+            })
+        }
+        //组件将要挂载调用钩子
+        componentWillMount(){
+            console.log('Sum---componentWillMount');
+        }
+
+        //组件挂载时调用钩子
+        render(){
+            console.log('Sum---render');
+            let{count}=this.state;
+            return (
+                <div>
+                    <h1>当前求和为:{count}</h1>
+                    <button onClick={this.add}>点此+1</button>
+                    <button onClick={this.unmount}>卸载组件</button>
+                </div>
+            );
+        }
+        //组件挂载完成调用钩子
+        componentDidMount(){
+            console.log('Sum---componentDidMount');  
+        }
+        //组件将要卸载钩子
+        componentWillUnmount(){
+            console.log('Sum---componentWillUnmount');
+        }
+        //组件是否将要被更新钩子
+        shouldComponentUpdate(){
+            console.log('Sum-shouldComponentUpdate');
+            return true;
+        }
+        //组件将要更新调用钩子
+        componentWillUpdate(){
+            console.log('Sum-componentWillUpdate');
+        }
+        //组件更新完成
+        componentDidUpdate(){
+            console.log('Sum-componentDidUpdate');
+        }
+    }
+    //渲染组件
+    ReactDOM.render(<Sum/>,document.getElementById('test'));
+    </script>
+</body>
+</html>
